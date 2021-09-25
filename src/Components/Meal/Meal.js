@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee} from "@fortawesome/free-solid-svg-icons";
 const Meal = (props) => {
-    console.log(props);
+    // console.log(props);
     const { strMealThumb, strCategory, strInstructions } = props.meal;
     return (
       <div className="">

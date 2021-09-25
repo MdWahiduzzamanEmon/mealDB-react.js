@@ -4,24 +4,55 @@ import './Meals.css';
 
 const Meals = () => {
     const [meals, setMeals] = useState([]);
-    const[mealName,setMealName]=useState([])
-    console.log(meals);
-    useEffect(() => {
-        fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=b")
+    const [mealName, setMealName] = useState([])
+    const [displayMeals,setDispalyMeals]=useState([])
+    // console.log(meals);
+     /*  useEffect(() => {
+        fetch(
+          "https://www.themealdb.com/api/json/v1/1/search.php?f=b"
+        )
           .then((res) => res.json())
-          .then((data) => setMeals(data.meals));
-    }, [])
+            .then((data) => {
+                setMeals(data.meals);
+            });
+      }, []); */
     
-    const handelMealName = (meal) => {
+    const handleMealName = (meal) => {
         setMealName(meal);
     }
+    const searchByName = (event) => {
+        if (event.key === "Enter") {
+            const searchText = event.target.value;
+            setDispalyMeals(searchText);
+        }
+        
+    }
+    useEffect(() => {
+        fetch(
+            "https://www.themealdb.com/api/json/v1/1/search.php?s=" + displayMeals
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                setMeals(data.meals);
+                if (data.meals == null) {
+                    return;
+                }
+            });
+        
+    }, [displayMeals]);
+
     return (
       <div>
         <section>
           <div>
             <div className="input-field py-3">
               <h2>Get-Meal</h2>
-              <input type="text" placeholder="Search meal..." />
+              <input
+                type="text"
+                placeholder="Search meal..."
+                onKeyPress={searchByName}
+                // value={displayMeals}
+              />
             </div>
           </div>
           <div className="meals-body">
@@ -30,7 +61,7 @@ const Meals = () => {
                 <Meal
                   key={meal.idMeal}
                   meal={meal}
-                  handelMealName={handelMealName}
+                  handelMealName={handleMealName}
                 ></Meal>
               ))}
             </div>
