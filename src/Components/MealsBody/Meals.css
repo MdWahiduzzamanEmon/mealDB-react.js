@@ -1,0 +1,55 @@
+.input-field{
+    display: flex;
+    background-color: gray;
+    justify-content: space-evenly;
+}
+.input-field h2{
+    font-weight: bold;
+    color: aqua;
+    font-size: 45px;
+}
+.input-field input{
+    width: 50%;
+    border-radius: .3125rem;
+    border: 2px solid transparent;
+    padding: 5px;
+     outline: none;
+}
+.input-field input:focus{
+     border: 2px solid aqua;
+    
+}
+.meals-body{
+    display: flex;
+}
+.meals{
+    display: grid;
+    
+    grid-template-columns: repeat(3,1fr);
+}
+.meals div{
+    margin: 10px;
+    width: 350px;
+}
+.meals p{
+    margin:20px 0; 
+}
+.meals button{
+    margin-top: 10px;
+}
+.meals-body img{
+    width: 70%;
+    
+}
+.name-section{
+    width: 30%;
+}
+.name-section h2{
+    border-bottom: 2px solid gray;
+    padding: 5px;
+}
+.name-section h3{
+    width: 300px;
+  height: 300px;
+  overflow: scroll;
+}
