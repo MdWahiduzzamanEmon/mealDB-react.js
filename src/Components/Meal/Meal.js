@@ -3,11 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee} from "@fortawesome/free-solid-svg-icons";
 const Meal = (props) => {
     // console.log(props);
-    const { strMealThumb, strCategory, strInstructions } = props.meal;
+    const { strMealThumb, strCategory, strInstructions, strMeal } = props.meal;
     return (
       <div className="">
         <img src={strMealThumb} alt="food img" />
         <div>
+          <h2>Name: {strMeal}</h2>
           <h5>Category: {strCategory}</h5>
           <p>Instructions: {strInstructions.slice(0, 80)}</p>
         </div>

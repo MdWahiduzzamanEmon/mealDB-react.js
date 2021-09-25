@@ -4,8 +4,9 @@ import './Meals.css';
 
 const Meals = () => {
     const [meals, setMeals] = useState([]);
-    const [mealName, setMealName] = useState([])
-    const [displayMeals,setDispalyMeals]=useState([])
+    const [mealsName, setMealName] = useState([])
+    const [displayMeals, setDispalyMeals] = useState([])
+    // console.log(mealsName);
     // console.log(meals);
      /*  useEffect(() => {
         fetch(
@@ -16,10 +17,14 @@ const Meals = () => {
                 setMeals(data.meals);
             });
       }, []); */
-    
+    // let num = 0;
     const handleMealName = (meal) => {
-        setMealName(meal);
+        const newOrder = [...mealsName, meal];
+        setMealName(newOrder);
+        
+        
     }
+  
     const searchByName = (event) => {
         if (event.key === "Enter") {
             const searchText = event.target.value;
@@ -28,17 +33,16 @@ const Meals = () => {
         
     }
     useEffect(() => {
-        fetch(
-            "https://www.themealdb.com/api/json/v1/1/search.php?s=" + displayMeals
-        )
-            .then((res) => res.json())
-            .then((data) => {
-                setMeals(data.meals);
-                if (data.meals == null) {
-                    return;
-                }
-            });
-        
+      fetch(
+        "https://www.themealdb.com/api/json/v1/1/search.php?s=" + displayMeals
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setMeals(data.meals);
+          if (data.meals == null) {
+            return;
+          }
+        });
     }, [displayMeals]);
 
     return (
@@ -67,13 +71,33 @@ const Meals = () => {
             </div>
 
             <div className="name-section fw-bold">
-              <h2>Meal Name: {mealName.strMeal}</h2>
-              <h3>Instructions: {mealName.strInstructions}</h3>
+                        <h2>Item Order: {mealsName.length}</h2>
+                       
+              {mealsName.map((mealName) => (
+                <MealCart
+                      key={mealName.idMeal}
+                      strMeal={mealName.strMeal}
+        
+                ></MealCart>
+              ))}
+
+              {/* <h3>Instructions: {mealName.strInstructions}</h3> */}
             </div>
           </div>
         </section>
       </div>
     );
 };
+
+function MealCart(props) {
+    
+      return (
+        <div>
+          <p>
+                  Meal Name: {props.strMeal}
+          </p>
+        </div>
+      );
+}
 
 export default Meals;
